@@ -2,10 +2,10 @@
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
+<%@page import="entidades.Autor"%>
 <%@page import="dao.AutorDAO"%>
 <%@page import="dao.AutorDAOImpl"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="entidades.Autor"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -42,7 +42,7 @@
             List<Autor> list = dao.all();
         %>
         
-        <h1>Cadastro de Autor</h1>
+        <h1 style="text-align:center;">Cadastro de Autor</h1>
         
         <div class="container">
             <form action="autor" method="POST">

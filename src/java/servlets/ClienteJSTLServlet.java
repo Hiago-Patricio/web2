@@ -5,11 +5,14 @@
  */
 package servlets;
 
-import dao.AutorDAO;
-import dao.AutorDAOImpl;
-import entidades.Autor;
+import dao.ClienteDAO;
+import dao.ClienteDAOImpl;
+import entidades.Cliente;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hiago
  */
-@WebServlet(name = "AutorServlet", urlPatterns = {"/autor"})
-public class AutorServlet extends HttpServlet {
+@WebServlet(name = "ClienteServlet", urlPatterns = {"/clientejstl"})
+public class ClienteJSTLServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,43 +37,49 @@ public class AutorServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        
-        Autor autor = new Autor();
-        AutorDAO dao = new AutorDAOImpl();
-        
-        
-        if(request.getParameter("nome")!= null
-            && request.getParameter("nacionalidade") != null 
-            && request.getParameter("nome") != null 
-            && request.getParameter("data_nascimento") != null){
-            int id = Integer.parseInt(request.getParameter("id"));
-
-            String dataNascimentoStr = request.getParameter("data_nascimento");
-            String dataFalecimentoStr = request.getParameter("data_falecimento");
+            throws ServletException, IOException, ParseException {
+        response.setContentType("text/html;charset=UTF-8");
             
-            try{
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                autor.setDataNascimento(sdf.parse(dataNascimentoStr));
-                autor.setDataFalecimento(sdf.parse(dataFalecimentoStr));
-            }catch(Exception erro){
+        Cliente c = new Cliente();
+        ClienteDAO dao = new ClienteDAOImpl();
+        
+        System.out.println(request.getParameter("nome"));
+        
+        if(request.getParameter("quantidadeCompras") != null
+            && request.getParameter("endereco") != null
+            && request.getParameter("sexo") != null
+            && request.getParameter("nome") != null
+            && request.getParameter("dataNascimento") != null
+            && request.getParameter("vip") != null){
+
+            if(!request.getParameter("id").equals("")){
+                int id = Integer.parseInt(request.getParameter("id"));
+                c.setId(id);
             }
-            
-            autor.setId(id);
-            autor.setNome(request.getParameter("nome"));
-            autor.setNacionalidade(request.getParameter("nacionalidade"));
-            dao.save(autor);
+            c.setQuantidadeCompras(Integer.parseInt(
+                request.getParameter("quantidadeCompras")));
+            c.setEndereco(request.getParameter("endereco"));
+            c.setSexo(request.getParameter("sexo"));
+            c.setNome(request.getParameter("nome"));
+            c.setVip(Boolean.parseBoolean(request.getParameter("vip")));
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+            c.setDataNascimento(sdf.parse(
+                request.getParameter("dataNascimento")));
+            dao.save(c);
         }else if(request.getParameter("excluir") != null){
             int id = Integer.parseInt(request.getParameter("excluir"));
-            dao.delete(dao.find(id));
+            c = dao.find(id);
+            dao.delete(c);
         }else if(request.getParameter("editar") != null){
             int id = Integer.parseInt(request.getParameter("editar"));
-            autor = dao.find(id);
-            request.setAttribute("autor", autor);
+            c = dao.find(id);
+            request.setAttribute("cliente", c);
         }
-                
-        RequestDispatcher view =  request.getRequestDispatcher("autor.jsp");
+        
+        request.setAttribute("lista", dao.all());
+        
+        RequestDispatcher view = request.getRequestDispatcher("clientejstl.jsp");
         view.forward(request, response);
     }
 
@@ -86,7 +95,11 @@ public class AutorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ClienteJSTLServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -100,7 +113,11 @@ public class AutorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ClienteJSTLServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

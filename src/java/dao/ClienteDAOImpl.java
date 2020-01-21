@@ -1,53 +1,59 @@
 package dao;
 
-import entidades.Autor;
+import entidades.Cliente;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-public class AutorDAOImpl implements AutorDAO{
+public class ClienteDAOImpl implements ClienteDAO{
 
-    private EntityManagerFactory emf = 
+    private EntityManagerFactory emf =
             Persistence.createEntityManagerFactory("livrariaPU");
     
-    public void save(Autor a) {
+    @Override
+    public void save(Cliente c) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         
-        if(a.getId() > 0){
-            em.merge(a);
-        }else{
-            em.persist(a);
+        // Update
+        if(c.getId() > 0){
+            em.merge(c);
         }
-        
+        // Save
+        else{
+            em.persist(c);
+        }
         em.getTransaction().commit();
         em.close();
     }
 
-    public void delete(Autor a) {
+    public void delete(Cliente c) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-                
-        if(!em.contains(a)){
-            a = em.merge(a);
+
+        // Atualiza objeto a ser usado
+        if(!em.contains(c)){
+            c = em.merge(c);
         }
         
-        em.remove(a);
+        em.remove(c);
         em.getTransaction().commit();
         em.close();
     }
 
-    public Autor find(int id) {
+    @Override
+    public Cliente find(int id) {
         EntityManager em = emf.createEntityManager();
-        return em.find(Autor.class, id);
+        return em.find(Cliente.class, id);
     }
 
-    public List<Autor> all() {
+    @Override
+    public List<Cliente> all() {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT a FROM "
-                + "Autor as a ORDER BY a.id");
+        Query q = em.createQuery("SELECT c FROM "
+                + "Cliente as c ORDER BY c.id");
         return q.getResultList();
     }
 
