@@ -44,7 +44,7 @@ public class ClienteJSTLServlet extends HttpServlet {
         ClienteDAO dao = new ClienteDAOImpl();
         
         request.setCharacterEncoding("UTF-8");
-        
+
         if(request.getParameter("endereco") != null
             && request.getParameter("sexo") != null
             && request.getParameter("nome") != null

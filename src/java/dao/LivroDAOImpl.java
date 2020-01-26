@@ -1,7 +1,6 @@
 package dao;
 
 import entidades.Livro;
-import entidades.Livro;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
