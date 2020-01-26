@@ -42,6 +42,7 @@
             List<Autor> list = dao.all();
         %>
         
+        <button class='btn btn-primary' type="button" onclick="window.location.href='index.html'">Home</button>
         <h1 style="text-align:center;">Cadastro de Autor</h1>
         
         <div class="container">
@@ -64,52 +65,54 @@
                     <input class="form-control" type="date" id="dataFalecimento" name="data_falecimento" value="<%=dataFalecimento%>"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar</button>
+                <button id="cancelar" class="btn btn-danger" onclick="location.href='${pageContext.request.requestURL}'" type="button">Cancelar</button>
             </form>
         </div>
         
         
-        <h2>Lista de autores</h2>
+        <h2 style="text-align:center">Lista de autores</h2>
         
-        <table class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Nome</th>    
-                    <th scope="col">Nacionalidade</th>    
-                    <th scope="col">Data de Nascimento</th>    
-                    <th scope="col">Data de Falecimento</th>    
-                    <th scope="col">Opções</th>    
-                </tr>
-            </thead>
-            <tbody>
-            <%for(Autor a: list){%>
+        <div class='container'>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nome</th>    
+                        <th scope="col">Nacionalidade</th>    
+                        <th scope="col">Data de Nascimento</th>    
+                        <th scope="col">Data de Falecimento</th>    
+                        <th scope="col">Opções</th>    
+                    </tr>
+                </thead>
+                <tbody>
+                <%for(Autor a: list){%>
 
-                <tr>   
-                    <td><%=a.getNome()%></td>
-                    <td><%=a.getNacionalidade()%></td>
-                    <%
-                        DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
-                    %>
-                    <td><%=df.format(a.getDataNascimento())%></td>
-                    <td><%
-                        try{
-                            out.println(df.format(a.getDataFalecimento()));
-                        }catch(Exception e){
-                        }
-                    %></td>
+                    <tr>   
+                        <td><%=a.getNome()%></td>
+                        <td><%=a.getNacionalidade()%></td>
+                        <%
+                            DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
+                        %>
+                        <td><%=df.format(a.getDataNascimento())%></td>
+                        <td><%
+                            try{
+                                out.println(df.format(a.getDataFalecimento()));
+                            }catch(Exception e){
+                            }
+                        %></td>
 
-                        <td>
-                            <a href="autor?excluir=<%= a.getId()%>">
-                                <button class="btn btn-danger">Excluir</button>
-                            </a>
-                        <a href="autor?editar=<%= a.getId()%>">
-                            <button class="btn btn-danger">Editar</button>
-                        </a>
-                    </td> 
-                </tr>
-            <%}%>
-            </tbody>
-        </table>
-        
+                            <td>
+                                <a href="autor?editar=<%= a.getId()%>">
+                                  <button class="btn btn-primary">Editar</button>
+                                </a>
+                                <a href="autor?excluir=<%= a.getId()%>">
+                                    <button class="btn btn-danger">Excluir</button>
+                                </a>
+                        </td> 
+                    </tr>
+                <%}%>
+                </tbody>
+            </table>
+        </div>
     </body>
 
 </html>

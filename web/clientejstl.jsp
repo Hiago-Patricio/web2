@@ -24,7 +24,25 @@
                 </div>
 
                 <div class="form-group">
-                    <label id="labelSexo" for="sexo">Sexo: </label>
+                    <label id="labelSexo" for="sexo">Sexo: </label><br/>
+                    <c:choose>
+                        <c:when test="${empty cliente.sexo}">
+                            <input type="radio" name="sexo" value="Masculino">Masculino<br/>
+                            <input type="radio" name="sexo" value="Feminino" >Feminino
+                            </c:when>
+                        <c:otherwise>
+                            <c:choose>
+                                <c:when test="${cliente.sexo}">
+                                    <input type="radio" name="sexo" value="Masculino" checked>Masculino<br/>
+                                    <input type="radio" name="sexo" value="Feminino" >Feminino
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="radio" name="sexo" value="Masculino">Masculino<br/>
+                                    <input type="radio" name="sexo" value="Feminino" checked>Feminino
+                                </c:otherwise>
+                            </c:choose>
+                        </c:otherwise>
+                    </c:choose>
                     <input class="form-control" type="text" id="sexo" name="sexo" required value="${cliente.sexo}"/>
                 </div>
 
@@ -39,22 +57,22 @@
                            value="<fmt:formatDate pattern="yyyy-MM-dd" value="${cliente.dataNascimento}"/>" />
                 </div>
 
-                <div class="form-group">
-                    <label id="labelVip" for="vip">Vip: </label>
+                <div class="form-group custom-radio">
+                    <label id="labelVip" for="vip">Vip: </label><br/>
                     <c:choose>
                         <c:when test="${empty cliente.vip}">
-                            <input class="form-control" type="radio" name="vip" value="true">Sim
-                            <input class="form-control" type="radio" name="vip" value="false" >Não
+                            <input type="radio" name="vip" value="true">Sim<br/>
+                            <input type="radio" name="vip" value="false" >Não
                             </c:when>
                         <c:otherwise>
                             <c:choose>
                                 <c:when test="${cliente.vip}">
-                                    <input class="form-control" type="radio" name="vip" value="true" checked>Sim
-                                    <input class="form-control" type="radio" name="vip" value="false" >Não
+                                    <input type="radio" name="vip" value="true" checked>Sim<br/>
+                                    <input type="radio" name="vip" value="false" >Não
                                 </c:when>
                                 <c:otherwise>
-                                    <input class="form-control" type="radio" name="vip" value="true">Sim
-                                    <input class="form-control" type="radio" name="vip" value="false" checked>Não
+                                    <input type="radio" name="vip" value="true">Sim<br/>
+                                    <input type="radio" name="vip" value="false" checked>Não
                                 </c:otherwise>
                             </c:choose>
                         </c:otherwise>
@@ -66,8 +84,10 @@
             </form>
         </div>
                 
+        <h2 style="text-align:center">Lista de clientes</h2>
+
         <div class="container">
-            <table class="table">
+            <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Quantidade de compras</th>
@@ -76,7 +96,7 @@
                         <th scope="col">Nome</th>
                         <th scope="col">Data de nascimento</th>
                         <th scope="col">Vip</th>
-                        <th scope="col">Açoes</th>
+                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -10,6 +10,7 @@
     </head>
     
     <body>
+        <button class='btn btn-primary' type="button" onclick="window.location.href='index.html'">Home</button>
         <jsp:doBody />
     </body>
 </html>

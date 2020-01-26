@@ -43,7 +43,7 @@ public class ClienteJSTLServlet extends HttpServlet {
         Cliente c = new Cliente();
         ClienteDAO dao = new ClienteDAOImpl();
         
-        System.out.println(request.getParameter("nome"));
+        request.setCharacterEncoding("UTF-8");
         
         if(request.getParameter("quantidadeCompras") != null
             && request.getParameter("endereco") != null
