@@ -75,7 +75,8 @@
                 </div>
 
                 <button id="salvar" class="btn btn-success" type="submit">Salvar</button>
-                <button id="cancelar" class="btn btn-danger" onclick="location.href='${pageContext.request.requestURL}'" type="button">Cancelar</button>
+                <button id="cancelar" class="btn btn-danger" onclick="location.href='clientejstl'" 
+                    type="button">Cancelar</button>
             </form>
         </div>
                 
