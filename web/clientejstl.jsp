@@ -13,9 +13,10 @@
         <div class="container">
             <form method="POST" action="clientejstl">
                 <input type="hidden" name="id" value="${cliente.id}"/>
+
                 <div class="form-group">
-                    <label id="labelQuantidadeCompras" for="quantidadeCompras">Quantidade de compras: </label>
-                    <input class="form-control" type="number" min="0" id="quantidadeCompras" name="quantidadeCompras" required value="${cliente.quantidadeCompras}"/>
+                    <label id="labelNome" for="nome">Nome: </label>
+                    <input class="form-control" type="text" id="nome" name="nome" required value="${cliente.nome}"/>
                 </div>
 
                 <div class="form-group">
@@ -27,33 +28,27 @@
                     <label id="labelSexo" for="sexo">Sexo: </label><br/>
                     <c:choose>
                         <c:when test="${empty cliente.sexo}">
-                            <input type="radio" name="sexo" value="Masculino">Masculino<br/>
+                            <input type="radio" name="sexo" value="Masculino" required>Masculino<br/>
                             <input type="radio" name="sexo" value="Feminino" >Feminino
                             </c:when>
                         <c:otherwise>
                             <c:choose>
                                 <c:when test="${cliente.sexo}">
-                                    <input type="radio" name="sexo" value="Masculino" checked>Masculino<br/>
+                                    <input type="radio" name="sexo" value="Masculino" required checked>Masculino<br/>
                                     <input type="radio" name="sexo" value="Feminino" >Feminino
                                 </c:when>
                                 <c:otherwise>
-                                    <input type="radio" name="sexo" value="Masculino">Masculino<br/>
+                                    <input type="radio" name="sexo" value="Masculino" required>Masculino<br/>
                                     <input type="radio" name="sexo" value="Feminino" checked>Feminino
                                 </c:otherwise>
                             </c:choose>
                         </c:otherwise>
                     </c:choose>
-                    <input class="form-control" type="text" id="sexo" name="sexo" required value="${cliente.sexo}"/>
-                </div>
-
-                <div class="form-group">
-                    <label id="labelNome" for="nome">Nome: </label>
-                    <input class="form-control" type="text" id="nome" name="nome" required value="${cliente.nome}"/>
                 </div>
 
                 <div class="form-group">
                     <label id="labelDataNascimento" for="dataNascimento">Data de nascimento: </label>
-                    <input classe="form-control" type="date" id="dataNascimento" name="dataNascimento" 
+                    <input classe="form-control" type="date" id="dataNascimento" name="dataNascimento" required
                            value="<fmt:formatDate pattern="yyyy-MM-dd" value="${cliente.dataNascimento}"/>" />
                 </div>
 
@@ -61,17 +56,17 @@
                     <label id="labelVip" for="vip">Vip: </label><br/>
                     <c:choose>
                         <c:when test="${empty cliente.vip}">
-                            <input type="radio" name="vip" value="true">Sim<br/>
+                            <input type="radio" name="vip" value="true" required>Sim<br/>
                             <input type="radio" name="vip" value="false" >Não
                             </c:when>
                         <c:otherwise>
                             <c:choose>
                                 <c:when test="${cliente.vip}">
-                                    <input type="radio" name="vip" value="true" checked>Sim<br/>
+                                    <input type="radio" name="vip" value="true" required checked>Sim<br/>
                                     <input type="radio" name="vip" value="false" >Não
                                 </c:when>
                                 <c:otherwise>
-                                    <input type="radio" name="vip" value="true">Sim<br/>
+                                    <input type="radio" name="vip" value="true" required>Sim<br/>
                                     <input type="radio" name="vip" value="false" checked>Não
                                 </c:otherwise>
                             </c:choose>
@@ -90,7 +85,6 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Quantidade de compras</th>
                         <th scope="col">Endereço</th>
                         <th scope="col">Sexo</th>
                         <th scope="col">Nome</th>
@@ -103,7 +97,6 @@
 
                     <c:forEach var="c" items="${lista}">
                         <tr>
-                            <td>${c.quantidadeCompras}</td>
                             <td>${c.endereco}</td>
                             <td>${c.sexo}</td>
                             <td>${c.nome}</td>

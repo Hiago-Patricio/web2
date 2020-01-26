@@ -20,7 +20,6 @@ public class Cliente implements Serializable{
     @GeneratedValue(generator="seq_cliente",
             strategy= GenerationType.SEQUENCE)
     private int id;
-    private int quantidadeCompras;
     private String endereco;
     private String sexo;
     private String nome;
@@ -33,14 +32,6 @@ public class Cliente implements Serializable{
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getQuantidadeCompras() {
-        return quantidadeCompras;
-    }
-
-    public void setQuantidadeCompras(int quantidadeCompras) {
-        this.quantidadeCompras = quantidadeCompras;
     }
 
     public String getEndereco() {

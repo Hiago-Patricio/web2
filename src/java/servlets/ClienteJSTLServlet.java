@@ -45,8 +45,7 @@ public class ClienteJSTLServlet extends HttpServlet {
         
         request.setCharacterEncoding("UTF-8");
         
-        if(request.getParameter("quantidadeCompras") != null
-            && request.getParameter("endereco") != null
+        if(request.getParameter("endereco") != null
             && request.getParameter("sexo") != null
             && request.getParameter("nome") != null
             && request.getParameter("dataNascimento") != null
@@ -56,8 +55,6 @@ public class ClienteJSTLServlet extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("id"));
                 c.setId(id);
             }
-            c.setQuantidadeCompras(Integer.parseInt(
-                request.getParameter("quantidadeCompras")));
             c.setEndereco(request.getParameter("endereco"));
             c.setSexo(request.getParameter("sexo"));
             c.setNome(request.getParameter("nome"));
