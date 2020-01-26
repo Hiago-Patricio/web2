@@ -47,7 +47,7 @@ public class AutorDAOImpl implements AutorDAO{
     public List<Autor> all() {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT a FROM "
-                + "Autor as a ORDER BY a.id");
+                + "Autor as a ORDER BY a.nome");
         return q.getResultList();
     }
 

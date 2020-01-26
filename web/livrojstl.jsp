@@ -25,6 +25,15 @@
                 </div>
 
                 <div class="form-group">
+                    Autor:
+                    <select name="autorId">
+                        <c:forEach var="a" items="${autores}">
+                            <option value="${a.id}">${a.nome}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                
+                <div class="form-group">
                     <label id="labelEditora" for="editora">Editora: </label>
                     <input class="form-control" type="text" id="editora" name="editora" required value="${livro.editora}"/>
                 </div>
@@ -59,6 +68,7 @@
                     <tr>
                         <th scope="col">Nome</th>
                         <th scope="col">Sinopse</th>
+                        <th scope="col">Autor</th>
                         <th scope="col">Editora</th>
                         <th scope="col">Edição</th>
                         <th scope="col">Preço</th>
@@ -72,6 +82,7 @@
                         <tr>
                             <td>${l.nome}</td>
                             <td>${l.sinopse}</td>
+                            <td>${l.autor.nome}</td>
                             <td>${l.editora}</td>
                             <td>${l.edicao}</td>
                             <td>

@@ -1,11 +1,14 @@
 package entidades;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -41,6 +44,9 @@ public class Autor {
     @Column(name="data_falecimento", nullable=true)
     private Date dataFalecimento;
 
+    @OneToMany(mappedBy = "autor")
+    private List<Livro> livros = new ArrayList<>();
+    
     public int getId() {
         return id;
     }
@@ -81,4 +87,8 @@ public class Autor {
         this.dataFalecimento = dataFalecimento;
     }
 
+    public List<Livro> getLivros() {
+        return livros;
+    }
+    
 }

@@ -5,8 +5,11 @@
  */
 package servlets;
 
+import dao.AutorDAO;
+import dao.AutorDAOImpl;
 import dao.LivroDAO;
 import dao.LivroDAOImpl;
+import entidades.Autor;
 import entidades.Livro;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -40,6 +43,8 @@ public class LivroJSTLServlet extends HttpServlet {
 
         Livro l = new Livro();
         LivroDAO dao = new LivroDAOImpl();
+        Autor a = new Autor();
+        AutorDAO daoAutor = new AutorDAOImpl();
         
         
         if(request.getParameter("nome") != null
@@ -59,7 +64,8 @@ public class LivroJSTLServlet extends HttpServlet {
             l.setEdicao(Integer.parseInt(request.getParameter("edicao")));
             l.setPreco(MoneyUtils.convertRealToFloat(request.getParameter("preco")));
             l.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
-            
+            a = daoAutor.find(Integer.parseInt(request.getParameter("autorId")));
+            l.setAutor(a);
             dao.save(l);
         }else if(request.getParameter("editar") != null){
             int id = Integer.parseInt(request.getParameter("editar"));
@@ -72,6 +78,7 @@ public class LivroJSTLServlet extends HttpServlet {
         }
         
         request.setAttribute("lista", dao.all());
+        request.setAttribute("autores", daoAutor.all());
         
         RequestDispatcher view = request.getRequestDispatcher("livrojstl.jsp");
         view.forward(request, response);

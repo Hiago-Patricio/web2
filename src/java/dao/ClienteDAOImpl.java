@@ -53,7 +53,7 @@ public class ClienteDAOImpl implements ClienteDAO{
     public List<Cliente> all() {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT c FROM "
-                + "Cliente as c ORDER BY c.id");
+                + "Cliente as c ORDER BY c.nome");
         return q.getResultList();
     }
 

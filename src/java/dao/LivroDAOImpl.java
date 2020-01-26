@@ -53,7 +53,7 @@ public class LivroDAOImpl implements LivroDAO {
     public List<Livro> all() {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT l FROM "
-                + "Livro as l ORDER BY l.id");
+                + "Livro as l ORDER BY l.nome");
         return q.getResultList();
     }
 
