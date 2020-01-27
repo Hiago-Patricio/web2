@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="autor")
@@ -30,9 +32,11 @@ public class Autor {
     @Column(nullable=false)
     private String nome;
     
+    @Temporal(TemporalType.DATE)
     @Column(name="data_nascimento", nullable=false)
     private Date dataNascimento;
     
+    @Temporal(TemporalType.DATE)
     @Column(name="data_falecimento", nullable=true)
     private Date dataFalecimento;
 

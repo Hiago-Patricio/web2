@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="cliente")
@@ -22,6 +24,7 @@ public class Cliente implements Serializable{
     private String endereco;
     private String sexo;
     private String nome;
+    @Temporal(TemporalType.DATE)
     private Date dataNascimento;
     private boolean vip;
 

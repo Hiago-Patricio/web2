@@ -36,10 +36,9 @@ public class AutorServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
+        request.setCharacterEncoding("UTF-8");
         Autor autor = new Autor();
         AutorDAO dao = new AutorDAOImpl();
-        
         
         if(request.getParameter("nome")!= null
             && request.getParameter("nacionalidade") != null 

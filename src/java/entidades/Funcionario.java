@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="funcionario")
@@ -24,6 +26,7 @@ public class Funcionario implements Serializable {
     private String nome;
     private String cargo;
     private float salario;
+    @Temporal(TemporalType.DATE)
     @Column(name="data_admissao")
     private Date dataAdmissao;
 
