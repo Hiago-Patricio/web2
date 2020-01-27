@@ -52,7 +52,8 @@ public class LivroJSTLServlet extends HttpServlet {
             && request.getParameter("editora") != null
             && request.getParameter("edicao") != null
             && request.getParameter("preco") != null
-            && request.getParameter("quantidade") != null)
+            && request.getParameter("quantidade") != null
+            && request.getParameter("autorId") != null)
         {
             if(!request.getParameter("id").equals("")){
                 l.setId(Integer.parseInt(

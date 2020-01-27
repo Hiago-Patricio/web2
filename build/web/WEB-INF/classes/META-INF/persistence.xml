@@ -5,6 +5,8 @@
     <class>entidades.Cliente</class>
     <class>entidades.Livro</class>
     <class>utils.MoneyUtils</class>
+    <class>entidades.Funcionario</class>
+    <class>dao.Funcionario</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/livr"/>

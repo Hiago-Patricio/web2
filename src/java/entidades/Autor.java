@@ -12,14 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/*  SQL da tabela autor na database livraria
-    CREATE TABLE autor(
-    id serial PRIMARY KEY not null,
-    nacionalidade varchar(100) not null,
-    nome varchar(100) not null,
-    data_nascimento date not null,
-    data_falecimento date);
-*/
 @Entity
 @Table(name="autor")
 @SequenceGenerator(name="seq_autor", 
