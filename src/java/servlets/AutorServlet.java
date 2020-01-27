@@ -39,37 +39,37 @@ public class AutorServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         Autor autor = new Autor();
         AutorDAO dao = new AutorDAOImpl();
-        
-        if(request.getParameter("nome")!= null
-            && request.getParameter("nacionalidade") != null 
-            && request.getParameter("nome") != null 
-            && request.getParameter("data_nascimento") != null){
+
+        if (request.getParameter("nome") != null
+                && request.getParameter("nacionalidade") != null
+                && request.getParameter("nome") != null
+                && request.getParameter("data_nascimento") != null) {
             int id = Integer.parseInt(request.getParameter("id"));
 
             String dataNascimentoStr = request.getParameter("data_nascimento");
             String dataFalecimentoStr = request.getParameter("data_falecimento");
-            
-            try{
+
+            try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 autor.setDataNascimento(sdf.parse(dataNascimentoStr));
                 autor.setDataFalecimento(sdf.parse(dataFalecimentoStr));
-            }catch(Exception erro){
+            } catch (Exception erro) {
             }
-            
+
             autor.setId(id);
             autor.setNome(request.getParameter("nome"));
             autor.setNacionalidade(request.getParameter("nacionalidade"));
             dao.save(autor);
-        }else if(request.getParameter("excluir") != null){
+        } else if (request.getParameter("excluir") != null) {
             int id = Integer.parseInt(request.getParameter("excluir"));
             dao.delete(dao.find(id));
-        }else if(request.getParameter("editar") != null){
+        } else if (request.getParameter("editar") != null) {
             int id = Integer.parseInt(request.getParameter("editar"));
             autor = dao.find(id);
             request.setAttribute("autor", autor);
         }
-                
-        RequestDispatcher view =  request.getRequestDispatcher("autor.jsp");
+
+        RequestDispatcher view = request.getRequestDispatcher("autor.jsp");
         view.forward(request, response);
     }
 

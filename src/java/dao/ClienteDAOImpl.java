@@ -7,22 +7,21 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-public class ClienteDAOImpl implements ClienteDAO{
+public class ClienteDAOImpl implements ClienteDAO {
 
-    private EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("livrariaPU");
-    
+    private EntityManagerFactory emf
+            = Persistence.createEntityManagerFactory("livrariaPU");
+
     @Override
     public void save(Cliente c) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        
+
         // Update
-        if(c.getId() > 0){
+        if (c.getId() > 0) {
             em.merge(c);
-        }
-        // Save
-        else{
+        } // Save
+        else {
             em.persist(c);
         }
         em.getTransaction().commit();
@@ -34,10 +33,10 @@ public class ClienteDAOImpl implements ClienteDAO{
         em.getTransaction().begin();
 
         // Atualiza objeto a ser usado
-        if(!em.contains(c)){
+        if (!em.contains(c)) {
             c = em.merge(c);
         }
-        
+
         em.remove(c);
         em.getTransaction().commit();
         em.close();

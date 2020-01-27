@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
     </head>
     <body>
-        
+
         <%
             int id = 0;
             String nome = "";
@@ -41,10 +41,10 @@
             AutorDAO dao = new AutorDAOImpl();
             List<Autor> list = dao.all();
         %>
-        
-        <button class='btn btn-primary' type="button" onclick="window.location.href='index.html'">Home</button>
+
+        <button class='btn btn-primary' type="button" onclick="window.location.href = 'index.html'">Home</button>
         <h1 style="text-align:center;">Cadastro de Autor</h1>
-        
+
         <div class="container">
             <form action="autor" method="POST">
                 <input type="hidden" name="id" value="<%= id%>">
@@ -65,14 +65,14 @@
                     <input class="form-control" type="date" id="dataFalecimento" name="data_falecimento" value="<%=dataFalecimento%>"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar</button>
-                <button id="cancelar" class="btn btn-danger" onclick="location.href='autor'" 
-                    type="button">Cancelar</button>
+                <button id="cancelar" class="btn btn-danger" onclick="location.href = 'autor'" 
+                        type="button">Cancelar</button>
             </form>
         </div>
-        
-        
+
+
         <h2 style="text-align:center">Lista de autores</h2>
-        
+
         <div class='container'>
             <table class="table table-striped">
                 <thead class="thead-dark">
@@ -85,7 +85,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <%for(Autor a: list){%>
+                    <%for(Autor a: list){%>
 
                     <tr>   
                         <td><%=a.getNome()%></td>
@@ -99,18 +99,18 @@
                                 out.println(df.format(a.getDataFalecimento()));
                             }catch(Exception e){
                             }
-                        %></td>
+                            %></td>
 
-                            <td>
-                                <a href="autor?editar=<%= a.getId()%>">
-                                  <button class="btn btn-primary">Editar</button>
-                                </a>
-                                <a href="autor?excluir=<%= a.getId()%>">
-                                    <button class="btn btn-danger">Excluir</button>
-                                </a>
+                        <td>
+                            <a href="autor?editar=<%= a.getId()%>">
+                                <button class="btn btn-primary">Editar</button>
+                            </a>
+                            <a href="autor?excluir=<%= a.getId()%>">
+                                <button class="btn btn-danger">Excluir</button>
+                            </a>
                         </td> 
                     </tr>
-                <%}%>
+                    <%}%>
                 </tbody>
             </table>
         </div>

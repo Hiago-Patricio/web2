@@ -8,21 +8,20 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class LivroDAOImpl implements LivroDAO {
-    
-    private EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("livrariaPU");
-    
+
+    private EntityManagerFactory emf
+            = Persistence.createEntityManagerFactory("livrariaPU");
+
     @Override
     public void save(Livro l) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        
+
         // Update
-        if(l.getId() > 0){
+        if (l.getId() > 0) {
             em.merge(l);
-        }
-        // Save
-        else{
+        } // Save
+        else {
             em.persist(l);
         }
         em.getTransaction().commit();
@@ -34,10 +33,10 @@ public class LivroDAOImpl implements LivroDAO {
         em.getTransaction().begin();
 
         // Atualiza objeto a ser usado
-        if(!em.contains(l)){
+        if (!em.contains(l)) {
             l = em.merge(l);
         }
-        
+
         em.remove(l);
         em.getTransaction().commit();
         em.close();

@@ -39,19 +39,19 @@ public class ClienteJSTLServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-            
+
         Cliente c = new Cliente();
         ClienteDAO dao = new ClienteDAOImpl();
-        
+
         request.setCharacterEncoding("UTF-8");
 
-        if(request.getParameter("endereco") != null
-            && request.getParameter("sexo") != null
-            && request.getParameter("nome") != null
-            && request.getParameter("dataNascimento") != null
-            && request.getParameter("vip") != null){
+        if (request.getParameter("endereco") != null
+                && request.getParameter("sexo") != null
+                && request.getParameter("nome") != null
+                && request.getParameter("dataNascimento") != null
+                && request.getParameter("vip") != null) {
 
-            if(!request.getParameter("id").equals("")){
+            if (!request.getParameter("id").equals("")) {
                 int id = Integer.parseInt(request.getParameter("id"));
                 c.setId(id);
             }
@@ -62,20 +62,20 @@ public class ClienteJSTLServlet extends HttpServlet {
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
             c.setDataNascimento(sdf.parse(
-                request.getParameter("dataNascimento")));
+                    request.getParameter("dataNascimento")));
             dao.save(c);
-        }else if(request.getParameter("excluir") != null){
+        } else if (request.getParameter("excluir") != null) {
             int id = Integer.parseInt(request.getParameter("excluir"));
             c = dao.find(id);
             dao.delete(c);
-        }else if(request.getParameter("editar") != null){
+        } else if (request.getParameter("editar") != null) {
             int id = Integer.parseInt(request.getParameter("editar"));
             c = dao.find(id);
             request.setAttribute("cliente", c);
         }
-        
+
         request.setAttribute("lista", dao.all());
-        
+
         RequestDispatcher view = request.getRequestDispatcher("clientejstl.jsp");
         view.forward(request, response);
     }

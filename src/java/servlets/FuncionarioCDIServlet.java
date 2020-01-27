@@ -24,44 +24,49 @@ public class FuncionarioCDIServlet extends HttpServlet {
     @Inject
     private Funcionario f;
 
-    @Inject @FuncionarioDAOQualifier
+    @Inject
+    @FuncionarioDAOQualifier
     private FuncionarioDAO dao;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
 
-        if(request.getParameter("nome") != null
-        && request.getParameter("cargo") != null
-        && request.getParameter("salario") != null
-        && request.getParameter("dataAdmissao") != null)
-        {
-            if(!request.getParameter("id").equals("")){
-                f.setId(Long.parseLong(
-                    request.getParameter("id")));
+        if (request.getParameter("nome") != null
+                && request.getParameter("cargo") != null
+                && request.getParameter("salario") != null
+                && request.getParameter("dataAdmissao") != null) {
+            if (!request.getParameter("id").equals("")) {
+                f.setId(Integer.parseInt(
+                        request.getParameter("id")));
             }
             f.setNome(request.getParameter("nome"));
             f.setCargo(request.getParameter("cargo"));
             f.setSalario(MoneyUtils.convertRealToFloat(
-                request.getParameter("salario")));
-            
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-            Date dataAdmissao = sdf.parse(request.getParameter("dataAdmissao"));
-            
+                    request.getParameter("salario")));
+
+            Date dataAdmissao = null;
+            try{
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                dataAdmissao = sdf.parse(request.getParameter("dataAdmissao"));
+                f.setDataAdmissao(dataAdmissao);
+            }catch(Exception erro){
+            }
+
             dao.save(f);
-        }else if(request.getParameter("editar") != null){
-            Long id = Long.parseLong(request.getParameter("editar"));
+        } else if (request.getParameter("editar") != null) {
+            Integer id = Integer.parseInt(request.getParameter("editar"));
             f = dao.find(id);
             request.setAttribute("funcionario", f);
-        }else if(request.getParameter("excluir") != null){
-            Long id = Long.parseLong(request.getParameter("excluir"));
+        } else if (request.getParameter("excluir") != null) {
+            Integer id = Integer.parseInt(request.getParameter("excluir"));
             f = dao.find(id);
             dao.delete(f);
         }
-        
+
         request.setAttribute("lista", dao.all());
-        
+
         RequestDispatcher view = request.getRequestDispatcher("funcionariocdi.jsp");
         view.forward(request, response);
 

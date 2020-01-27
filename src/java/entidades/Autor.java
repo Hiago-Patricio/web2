@@ -15,34 +15,34 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="autor")
-@SequenceGenerator(name="seq_autor", 
-        sequenceName="autor_id_seq",
-        allocationSize=1)
+@Table(name = "autor")
+@SequenceGenerator(name = "seq_autor",
+        sequenceName = "autor_id_seq",
+        allocationSize = 1)
 public class Autor {
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_autor")
-    @Column(nullable=false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_autor")
+    @Column(nullable = false)
     private int id;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String nacionalidade;
-    
-    @Column(nullable=false)
+
+    @Column(nullable = false)
     private String nome;
-    
+
     @Temporal(TemporalType.DATE)
-    @Column(name="data_nascimento", nullable=false)
+    @Column(name = "data_nascimento", nullable = false)
     private Date dataNascimento;
-    
+
     @Temporal(TemporalType.DATE)
-    @Column(name="data_falecimento", nullable=true)
+    @Column(name = "data_falecimento", nullable = true)
     private Date dataFalecimento;
 
     @OneToMany(mappedBy = "autor")
     private List<Livro> livros = new ArrayList<>();
-    
+
     public int getId() {
         return id;
     }
@@ -86,5 +86,5 @@ public class Autor {
     public List<Livro> getLivros() {
         return livros;
     }
-    
+
 }

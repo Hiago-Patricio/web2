@@ -13,28 +13,28 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="funcionario")
-@SequenceGenerator(name="seq_funcionario",
-        sequenceName="funcionario_id_seq", allocationSize=1)
+@Table(name = "funcionario")
+@SequenceGenerator(name = "seq_funcionario",
+        sequenceName = "funcionario_id_seq", allocationSize = 1)
 public class Funcionario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(generator="seq_funcionario",
+    @GeneratedValue(generator = "seq_funcionario",
             strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private int id;
     private String nome;
     private String cargo;
     private float salario;
     @Temporal(TemporalType.DATE)
-    @Column(name="data_admissao")
+    @Column(name = "data_admissao")
     private Date dataAdmissao;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -69,6 +69,5 @@ public class Funcionario implements Serializable {
     public void setDataAdmissao(Date dataAdmissao) {
         this.dataAdmissao = dataAdmissao;
     }
-    
 
 }

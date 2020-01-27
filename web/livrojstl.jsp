@@ -9,7 +9,7 @@
     </jsp:attribute>
     <jsp:body>
         <h1 style="text-align:center;">Cadastro de Livro</h1>
-        
+
         <div class="container">
             <form method="POST" action="livrojstl">
                 <input type="hidden" name="id" value="${livro.id}"/>
@@ -32,34 +32,34 @@
                         </c:forEach>
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label id="labelEditora" for="editora">Editora: </label>
                     <input class="form-control" type="text" id="editora" name="editora" required value="${livro.editora}"/>
                 </div>
-                
+
                 <div class="form-group">
                     <label id="labelEdicao" for="edicao">Ediçao: </label>
                     <input class="form-control" type="number" min="1" id="edicao" name="edicao" required value="${livro.edicao}"/>
                 </div>
-                
+
                 <div class="form-group">
                     <label id="labelPreco" for="preco">Preço: </label>
                     <aux:money classe="form-control" id="preco" 
                                nome="preco" valor="${livro.preco}"/>
                 </div>
-                
+
                 <div class="form-group">
                     <label id="labelQuantidade" for="quantidade">Quantidade: </label>
                     <input class="form-control" type="number" min="1" id="quantidade" name="quantidade" required value="${livro.quantidade}"/>
                 </div>
 
                 <button id="salvar" class="btn btn-success" type="submit">Salvar</button>
-                <button id="cancelar" class="btn btn-danger" onclick="location.href='livrojstl'" 
-                    type="button">Cancelar</button>
+                <button id="cancelar" class="btn btn-danger" onclick="location.href = 'livrojstl'" 
+                        type="button">Cancelar</button>
             </form>
         </div>
-                
+
         <h2 style="text-align:center">Lista de livros</h2>
 
         <div class="container">

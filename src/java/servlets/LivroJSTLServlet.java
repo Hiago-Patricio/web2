@@ -45,17 +45,15 @@ public class LivroJSTLServlet extends HttpServlet {
         LivroDAO dao = new LivroDAOImpl();
         Autor a = new Autor();
         AutorDAO daoAutor = new AutorDAOImpl();
-        
-        
-        if(request.getParameter("nome") != null
-            && request.getParameter("sinopse") != null
-            && request.getParameter("editora") != null
-            && request.getParameter("edicao") != null
-            && request.getParameter("preco") != null
-            && request.getParameter("quantidade") != null
-            && request.getParameter("autorId") != null)
-        {
-            if(!request.getParameter("id").equals("")){
+
+        if (request.getParameter("nome") != null
+                && request.getParameter("sinopse") != null
+                && request.getParameter("editora") != null
+                && request.getParameter("edicao") != null
+                && request.getParameter("preco") != null
+                && request.getParameter("quantidade") != null
+                && request.getParameter("autorId") != null) {
+            if (!request.getParameter("id").equals("")) {
                 l.setId(Integer.parseInt(
                         request.getParameter("id")));
             }
@@ -68,19 +66,19 @@ public class LivroJSTLServlet extends HttpServlet {
             a = daoAutor.find(Integer.parseInt(request.getParameter("autorId")));
             l.setAutor(a);
             dao.save(l);
-        }else if(request.getParameter("editar") != null){
+        } else if (request.getParameter("editar") != null) {
             int id = Integer.parseInt(request.getParameter("editar"));
             l = dao.find(id);
             request.setAttribute("livro", l);
-        }else if(request.getParameter("excluir") != null){
+        } else if (request.getParameter("excluir") != null) {
             int id = Integer.parseInt(request.getParameter("excluir"));
             l = dao.find(id);
             dao.delete(l);
         }
-        
+
         request.setAttribute("lista", dao.all());
         request.setAttribute("autores", daoAutor.all());
-        
+
         RequestDispatcher view = request.getRequestDispatcher("livrojstl.jsp");
         view.forward(request, response);
     }

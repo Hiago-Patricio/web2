@@ -12,14 +12,15 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="cliente")
-@SequenceGenerator(name="seq_cliente",
-        sequenceName="cliente_id_seq", allocationSize=1)
-public class Cliente implements Serializable{
+@Table(name = "cliente")
+@SequenceGenerator(name = "seq_cliente",
+        sequenceName = "cliente_id_seq", allocationSize = 1)
+public class Cliente implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(generator="seq_cliente",
-            strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "seq_cliente",
+            strategy = GenerationType.SEQUENCE)
     private int id;
     private String endereco;
     private String sexo;

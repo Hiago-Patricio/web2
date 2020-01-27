@@ -10,10 +10,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="livro")
-@SequenceGenerator(name="seq_livro",
-        sequenceName="livro_id_seq", allocationSize=1)
-public class Livro implements Serializable{
+@Table(name = "livro")
+@SequenceGenerator(name = "seq_livro",
+        sequenceName = "livro_id_seq", allocationSize = 1)
+public class Livro implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(generator = "seq_livro",
@@ -83,12 +84,12 @@ public class Livro implements Serializable{
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-    
-    public Autor getAutor(){
+
+    public Autor getAutor() {
         return this.autor;
     }
-    
-    public void setAutor(Autor autor){
+
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 }

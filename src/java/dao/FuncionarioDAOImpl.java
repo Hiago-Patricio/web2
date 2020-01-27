@@ -13,13 +13,13 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 
     @Inject
     private EntityManagerFactory factory;
-    
+
     public void save(Funcionario f) {
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
-        if(f.getId() > 0){
+        if (f.getId() > 0) {
             em.merge(f);
-        }else{
+        } else {
             em.persist(f);
         }
         em.getTransaction().commit();
@@ -29,7 +29,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
     public void delete(Funcionario f) {
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
-        if(!em.contains(f)){
+        if (!em.contains(f)) {
             f = em.merge(f);
         }
         em.remove(f);
@@ -37,14 +37,15 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
         em.close();
     }
 
-    public Funcionario find(Long id) {
+    public Funcionario find(int id) {
         EntityManager em = factory.createEntityManager();
         return em.find(Funcionario.class, id);
     }
 
     public List<Funcionario> all() {
         EntityManager em = factory.createEntityManager();
-        Query q = em.createQuery("SELECT f FROM Funcionario as f");
+        Query q = em.createQuery("SELECT f FROM "
+                + "Funcionario as f ORDER BY f.nome");
         return q.getResultList();
     }
 

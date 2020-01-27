@@ -30,7 +30,7 @@
                         <c:when test="${empty cliente.sexo}">
                             <input type="radio" name="sexo" value="Masculino" required>Masculino<br/>
                             <input type="radio" name="sexo" value="Feminino" >Feminino
-                            </c:when>
+                        </c:when>
                         <c:otherwise>
                             <c:choose>
                                 <c:when test="${cliente.sexo}">
@@ -58,7 +58,7 @@
                         <c:when test="${empty cliente.vip}">
                             <input type="radio" name="vip" value="true" required>Sim<br/>
                             <input type="radio" name="vip" value="false" >Não
-                            </c:when>
+                        </c:when>
                         <c:otherwise>
                             <c:choose>
                                 <c:when test="${cliente.vip}">
@@ -75,11 +75,11 @@
                 </div>
 
                 <button id="salvar" class="btn btn-success" type="submit">Salvar</button>
-                <button id="cancelar" class="btn btn-danger" onclick="location.href='clientejstl'" 
-                    type="button">Cancelar</button>
+                <button id="cancelar" class="btn btn-danger" onclick="location.href = 'clientejstl'" 
+                        type="button">Cancelar</button>
             </form>
         </div>
-                
+
         <h2 style="text-align:center">Lista de clientes</h2>
 
         <div class="container">
@@ -103,7 +103,7 @@
                             <td>${c.nome}</td>
                             <td>
                                 <fmt:formatDate value="${c.dataNascimento}"
-                                    type="date" pattern="MM/dd/yyyy"/>
+                                                type="date" pattern="MM/dd/yyyy"/>
                             </td>
 
                             <c:choose>
