@@ -33,7 +33,7 @@
                         </c:when>
                         <c:otherwise>
                             <c:choose>
-                                <c:when test="${cliente.sexo}">
+                                <c:when test="${cliente.sexo == 'Masculino'}">
                                     <input type="radio" name="sexo" value="Masculino" required checked>Masculino<br/>
                                     <input type="radio" name="sexo" value="Feminino" >Feminino
                                 </c:when>

@@ -9,8 +9,11 @@ import dao.AutorDAO;
 import dao.AutorDAOImpl;
 import dao.LivroDAO;
 import dao.LivroDAOImpl;
+import dao.MidiaDAO;
+import dao.MidiaDAOImpl;
 import entidades.Autor;
 import entidades.Livro;
+import entidades.Midia;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,10 +45,12 @@ public class LivroJSTLServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         Livro l = new Livro();
-        LivroDAO dao = new LivroDAOImpl();
+        LivroDAO daoLivro = new LivroDAOImpl();
         Autor a = new Autor();
         AutorDAO daoAutor = new AutorDAOImpl();
-
+        Midia m = new Midia();
+        MidiaDAO daoMidia = new MidiaDAOImpl();
+        
         if (request.getParameter("nome") != null
                 && request.getParameter("sinopse") != null
                 && request.getParameter("editora") != null
@@ -61,22 +66,27 @@ public class LivroJSTLServlet extends HttpServlet {
             l.setSinopse(request.getParameter("sinopse"));
             l.setEditora(request.getParameter("editora"));
             l.setEdicao(Integer.parseInt(request.getParameter("edicao")));
-            l.setPreco(MoneyUtils.convertRealToFloat(request.getParameter("preco")));
-            l.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
+            m.setPreco(MoneyUtils.convertRealToFloat(request.getParameter("preco")));
+            m.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
             a = daoAutor.find(Integer.parseInt(request.getParameter("autorId")));
+            if (!request.getParameter("idMidia").equals("")) {
+                m.setId(Integer.parseInt(
+                        request.getParameter("idMidia")));
+            }
             l.setAutor(a);
-            dao.save(l);
+            l.setMidia(m);
+            daoLivro.save(l);
         } else if (request.getParameter("editar") != null) {
             int id = Integer.parseInt(request.getParameter("editar"));
-            l = dao.find(id);
+            l = daoLivro.find(id);
             request.setAttribute("livro", l);
         } else if (request.getParameter("excluir") != null) {
             int id = Integer.parseInt(request.getParameter("excluir"));
-            l = dao.find(id);
-            dao.delete(l);
+            l = daoLivro.find(id);
+            daoLivro.delete(l);
         }
 
-        request.setAttribute("lista", dao.all());
+        request.setAttribute("lista", daoLivro.all());
         request.setAttribute("autores", daoAutor.all());
 
         RequestDispatcher view = request.getRequestDispatcher("livrojstl.jsp");

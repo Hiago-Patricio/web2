@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,10 +25,10 @@ public class Livro implements Serializable {
     private String sinopse;
     private String editora;
     private int edicao;
-    private float preco;
-    private int quantidade;
     @ManyToOne
     private Autor autor;
+    @OneToOne
+    private Midia midia;
 
     public int getId() {
         return id;
@@ -69,22 +70,6 @@ public class Livro implements Serializable {
         this.edicao = edicao;
     }
 
-    public float getPreco() {
-        return preco;
-    }
-
-    public void setPreco(float preco) {
-        this.preco = preco;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
     public Autor getAutor() {
         return this.autor;
     }
@@ -92,4 +77,13 @@ public class Livro implements Serializable {
     public void setAutor(Autor autor) {
         this.autor = autor;
     }
+
+    public Midia getMidia() {
+        return midia;
+    }
+
+    public void setMidia(Midia midia) {
+        this.midia = midia;
+    }
+
 }

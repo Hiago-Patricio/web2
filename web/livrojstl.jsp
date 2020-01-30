@@ -13,6 +13,7 @@
         <div class="container">
             <form method="POST" action="livrojstl">
                 <input type="hidden" name="id" value="${livro.id}"/>
+                <input type="hidden" name="idMidia" value="${livro.midia.id}"/>
 
                 <div class="form-group">
                     <label id="labelNome" for="nome">Nome: </label>
@@ -28,7 +29,11 @@
                     Autor:
                     <select name="autorId">
                         <c:forEach var="a" items="${autores}">
-                            <option value="${a.id}">${a.nome}</option>
+                            <option value="${a.id}"
+                                <c:if test="${a.id == livro.autor.id}">
+                                    selected
+                                </c:if>
+                            >${a.nome}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -46,12 +51,12 @@
                 <div class="form-group">
                     <label id="labelPreco" for="preco">Preço: </label>
                     <aux:money classe="form-control" id="preco" 
-                               nome="preco" valor="${livro.preco}"/>
+                               nome="preco" valor="${livro.midia.preco}"/>
                 </div>
 
                 <div class="form-group">
                     <label id="labelQuantidade" for="quantidade">Quantidade: </label>
-                    <input class="form-control" type="number" min="1" id="quantidade" name="quantidade" required value="${livro.quantidade}"/>
+                    <input class="form-control" type="number" min="1" id="quantidade" name="quantidade" required value="${livro.midia.quantidade}"/>
                 </div>
 
                 <button id="salvar" class="btn btn-success" type="submit">Salvar</button>
@@ -87,9 +92,9 @@
                             <td>${l.edicao}</td>
                             <td>
                                 <fmt:setLocale value="pt_BR"/>
-                                <fmt:formatNumber value="${l.preco}" type="currency"/>
+                                <fmt:formatNumber value="${l.midia.preco}" type="currency"/>
                             </td>
-                            <td>${l.quantidade}</td>
+                            <td>${l.midia.quantidade}</td>
 
                             <td>
                                 <a href="livrojstl?editar=${l.id}">
