@@ -1,6 +1,5 @@
 package dao;
 
-import cdi.FuncionarioDAOQualifier;
 import entidades.Funcionario;
 import java.util.List;
 import javax.inject.Inject;
@@ -8,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-@FuncionarioDAOQualifier
 public class FuncionarioDAOImpl implements FuncionarioDAO {
 
     @Inject

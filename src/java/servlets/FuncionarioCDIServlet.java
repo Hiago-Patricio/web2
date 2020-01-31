@@ -1,6 +1,5 @@
 package servlets;
 
-import cdi.FuncionarioDAOQualifier;
 import dao.FuncionarioDAO;
 import entidades.Funcionario;
 import java.io.IOException;
@@ -25,7 +24,6 @@ public class FuncionarioCDIServlet extends HttpServlet {
     private Funcionario f;
 
     @Inject
-    @FuncionarioDAOQualifier
     private FuncionarioDAO dao;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
