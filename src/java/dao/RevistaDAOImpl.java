@@ -1,58 +1,65 @@
 package dao;
 
-import entidades.Midia;
+import entidades.Revista;
 import java.util.List;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-public class MidiaDAOImpl implements MidiaDAO{
-    private EntityManagerFactory emf
-            = Persistence.createEntityManagerFactory("livrariaPU");
+public class RevistaDAOImpl implements RevistaDAO {
 
+    @Inject
+    private EntityManagerFactory emf;
+    @Inject
+    private MidiaDAO daoMidia;
+    
     @Override
-    public void save(Midia m) {
+    public void save(Revista r) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
         // Update
-        if (m.getId() > 0) {
-            em.merge(m);
+        if (r.getId() > 0) {
+            em.merge(r);
         } // Save
         else {
-            em.persist(m);
+            em.persist(r);
         }
+        daoMidia.save(r.getMidia());
+
         em.getTransaction().commit();
         em.close();
     }
 
     @Override
-    public void delete(Midia m) {
+    public void delete(Revista r) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
         // Atualiza objeto a ser usado
-        if (!em.contains(m)) {
-            m = em.merge(m);
+        if (!em.contains(r)) {
+            r = em.merge(r);
         }
-
-        em.remove(m);
+        
+        em.remove(r);
         em.getTransaction().commit();
         em.close();
+        daoMidia.delete(r.getMidia());
     }
 
     @Override
-    public Midia find(int id) {
+    public Revista find(int id) {
         EntityManager em = emf.createEntityManager();
-        return em.find(Midia.class, id);
+        return em.find(Revista.class, id);
     }
 
     @Override
-    public List<Midia> all() {
+    public List<Revista> all() {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT m FROM "
-                + "Midia as m ORDER BY m.nome");
+        Query q = em.createQuery("SELECT r FROM "
+                + "Revista as r ORDER BY r.titulo");
         return q.getResultList();
     }
+
 }
