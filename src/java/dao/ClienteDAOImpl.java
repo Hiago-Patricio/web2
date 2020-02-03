@@ -37,6 +37,10 @@ public class ClienteDAOImpl implements ClienteDAO {
             c = em.merge(c);
         }
 
+        Query query = em.createNativeQuery(
+                "DELETE FROM Compra c WHERE c.cliente_id = " + c.getId());
+        query.executeUpdate();
+
         em.remove(c);
         em.getTransaction().commit();
         em.close();

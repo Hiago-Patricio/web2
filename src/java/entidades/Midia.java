@@ -21,6 +21,7 @@ public class Midia implements Serializable {
     private int id;
     private float preco;
     private int quantidade;
+    private String tipo;
     
     public int getId() {
         return id;
@@ -44,6 +45,14 @@ public class Midia implements Serializable {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
 }

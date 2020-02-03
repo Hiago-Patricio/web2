@@ -16,8 +16,8 @@
                 <input type="hidden" name="idMidia" value="${livro.midia.id}"/>
 
                 <div class="form-group">
-                    <label id="labelNome" for="nome">Nome: </label>
-                    <input class="form-control" type="text" id="nome" name="nome" required value="${livro.nome}"/>
+                    <label id="labelTitulo" for="titulo">Título: </label>
+                    <input class="form-control" type="text" id="titulo" name="titulo" required value="${livro.titulo}"/>
                 </div>
 
                 <div class="form-group">
@@ -71,7 +71,7 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Nome</th>
+                        <th scope="col">Título</th>
                         <th scope="col">Sinopse</th>
                         <th scope="col">Autor</th>
                         <th scope="col">Editora</th>
@@ -85,7 +85,7 @@
 
                     <c:forEach var="l" items="${lista}">
                         <tr>
-                            <td>${l.nome}</td>
+                            <td>${l.titulo}</td>
                             <td>${l.sinopse}</td>
                             <td>${l.autor.nome}</td>
                             <td>${l.editora}</td>

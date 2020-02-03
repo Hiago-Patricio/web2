@@ -53,6 +53,7 @@ public class RevistaCDIServlet extends HttpServlet {
                     request.getParameter("preco")));
             m.setQuantidade(Integer.parseInt(
                     request.getParameter("quantidade")));
+            m.setTipo("revista");
             if(!request.getParameter("idMidia").equals("")){
                 m.setId(Integer.parseInt(
                         request.getParameter("idMidia")));
@@ -60,12 +61,6 @@ public class RevistaCDIServlet extends HttpServlet {
                 m.setId(0);
             }
             r.setMidia(m);
-            System.out.println(r.getId());
-            System.out.println(r.getTitulo());
-            System.out.println(r.getEditora());
-            System.out.println(r.getMidia().getId());
-            System.out.println(r.getMidia().getPreco());
-            System.out.println(r.getMidia().getQuantidade());
             daoRevista.save(r);
         } else if (request.getParameter("editar") != null) {
             int id = Integer.parseInt(request.getParameter("editar"));

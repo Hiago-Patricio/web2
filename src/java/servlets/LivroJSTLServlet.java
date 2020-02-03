@@ -51,7 +51,7 @@ public class LivroJSTLServlet extends HttpServlet {
         Midia m = new Midia();
         MidiaDAO daoMidia = new MidiaDAOImpl();
         
-        if (request.getParameter("nome") != null
+        if (request.getParameter("titulo") != null
                 && request.getParameter("sinopse") != null
                 && request.getParameter("editora") != null
                 && request.getParameter("edicao") != null
@@ -61,17 +61,22 @@ public class LivroJSTLServlet extends HttpServlet {
             if (!request.getParameter("id").equals("")) {
                 l.setId(Integer.parseInt(
                         request.getParameter("id")));
+            }else{
+                l.setId(0);
             }
-            l.setNome(request.getParameter("nome"));
+            l.setTitulo(request.getParameter("titulo"));
             l.setSinopse(request.getParameter("sinopse"));
             l.setEditora(request.getParameter("editora"));
             l.setEdicao(Integer.parseInt(request.getParameter("edicao")));
             m.setPreco(MoneyUtils.convertRealToFloat(request.getParameter("preco")));
             m.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
+            m.setTipo("livro");
             a = daoAutor.find(Integer.parseInt(request.getParameter("autorId")));
             if (!request.getParameter("idMidia").equals("")) {
                 m.setId(Integer.parseInt(
                         request.getParameter("idMidia")));
+            }else{
+                m.setId(0);
             }
             l.setAutor(a);
             l.setMidia(m);

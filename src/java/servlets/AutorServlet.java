@@ -7,9 +7,11 @@ package servlets;
 
 import dao.AutorDAO;
 import dao.AutorDAOImpl;
+import dao.LivroDAO;
 import entidades.Autor;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -37,6 +37,10 @@ public class MidiaDAOImpl implements MidiaDAO{
             m = em.merge(m);
         }
 
+        Query query = em.createNativeQuery(
+                "DELETE FROM Compra C WHERE c.midia_id = " + m.getId());
+        query.executeUpdate();
+
         em.remove(m);
         em.getTransaction().commit();
         em.close();
@@ -52,7 +56,7 @@ public class MidiaDAOImpl implements MidiaDAO{
     public List<Midia> all() {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT m FROM "
-                + "Midia as m ORDER BY m.nome");
+                + "Midia as m");
         return q.getResultList();
     }
 }

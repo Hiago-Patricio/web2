@@ -1,5 +1,6 @@
 package entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,8 +20,9 @@ import javax.persistence.TemporalType;
 @SequenceGenerator(name = "seq_autor",
         sequenceName = "autor_id_seq",
         allocationSize = 1)
-public class Autor {
+public class Autor implements Serializable{
 
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_autor")
     @Column(nullable = false)

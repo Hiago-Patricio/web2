@@ -41,7 +41,7 @@ public class RevistaDAOImpl implements RevistaDAO {
         if (!em.contains(r)) {
             r = em.merge(r);
         }
-        
+
         em.remove(r);
         em.getTransaction().commit();
         em.close();

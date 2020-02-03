@@ -7,6 +7,8 @@
     <class>entidades.Midia</class>
     <class>entidades.Funcionario</class>
     <class>entidades.Revista</class>
+    <class>entidades.Compra</class>
+    <class>entidades.CompraMidia</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/web2"/>

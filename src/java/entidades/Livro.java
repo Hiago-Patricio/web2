@@ -21,7 +21,7 @@ public class Livro implements Serializable {
     @GeneratedValue(generator = "seq_livro",
             strategy = GenerationType.SEQUENCE)
     private int id;
-    private String nome;
+    private String titulo;
     private String sinopse;
     private String editora;
     private int edicao;
@@ -38,12 +38,12 @@ public class Livro implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getSinopse() {

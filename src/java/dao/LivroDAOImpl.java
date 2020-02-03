@@ -3,6 +3,7 @@ package dao;
 import entidades.Livro;
 import entidades.Midia;
 import java.util.List;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -18,6 +19,8 @@ public class LivroDAOImpl implements LivroDAO {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
+        MidiaDAO daoMidia = new MidiaDAOImpl();
+        daoMidia.save(l.getMidia());
         // Update
         if (l.getId() > 0) {
             em.merge(l);
@@ -25,8 +28,6 @@ public class LivroDAOImpl implements LivroDAO {
         else {
             em.persist(l);
         }
-        MidiaDAO daoMidia = new MidiaDAOImpl();
-        daoMidia.save(l.getMidia());
         
         em.getTransaction().commit();
         em.close();
@@ -41,12 +42,12 @@ public class LivroDAOImpl implements LivroDAO {
         if (!em.contains(l)) {
             l = em.merge(l);
         }
-        Midia m = l.getMidia();
-        em.remove(m);
 
         em.remove(l);
         em.getTransaction().commit();
         em.close();
+        MidiaDAO daoMidia = new MidiaDAOImpl();
+        daoMidia.delete(l.getMidia());
     }
 
     @Override
@@ -59,7 +60,7 @@ public class LivroDAOImpl implements LivroDAO {
     public List<Livro> all() {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT l FROM "
-                + "Livro as l ORDER BY l.nome");
+                + "Livro as l ORDER BY l.titulo");
         return q.getResultList();
     }
 

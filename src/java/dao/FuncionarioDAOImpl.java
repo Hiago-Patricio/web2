@@ -30,6 +30,11 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
         if (!em.contains(f)) {
             f = em.merge(f);
         }
+
+        Query query = em.createNativeQuery(
+                "DELETE FROM Compra c WHERE c.funcionario_id = " + f.getId());
+        query.executeUpdate();
+        
         em.remove(f);
         em.getTransaction().commit();
         em.close();
